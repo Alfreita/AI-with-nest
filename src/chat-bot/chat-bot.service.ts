@@ -1,7 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosError } from 'axios';
-import { Configuration, OpenAIApi } from 'openai';
 import { catchError, firstValueFrom } from 'rxjs';
 import { CreateChatBotDto } from './dto/create-chat-bot.dto';
 
@@ -11,11 +10,6 @@ export class ChatBotService {
   apiKey: string;
   messages: Array<{ role: string; content: string }> = [];
   constructor(private readonly httpService: HttpService) {
-    this.openAI = new OpenAIApi(
-      new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
-      }),
-    );
     this.apiKey = process.env.OPENAI_API_KEY;
   }
 
